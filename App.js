@@ -1,12 +1,41 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import LoginScreen from './components/LoginScreen';
+import SignupScreen from './components/SignupScreen';
+import TodoListScreen from './components/TodoListScreen';
+import AddTaskScreen from './components/AddTaskScreen';
+import TaskDetailScreen from './components/TaskDetailScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [user, setUser] = useState(null);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+   
+
+
+
+    
+
+    <NavigationContainer>
+    <Stack.Navigator initialRouteName={user ? 'TodoList' : 'Login'}>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name="TodoList" component={TodoListScreen} />
+      <Stack.Screen name="AddTask" component={AddTaskScreen} />
+      <Stack.Screen name="TaskDetail" component={TaskDetailScreen} />
+    </Stack.Navigator>
+  </NavigationContainer>
+
+    
+    
+    
+    
+    
   );
 }
 
