@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button } from 'react-native';
 
-const AddTaskScreen = ({ navigation}) => {
+const AddTaskScreen = ({ route, navigation}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const { tasks } = route.params;
-
+  
+  const {length} = route.params
+  const { addTask } = route.params;
+ 
+ 
   const handleAddTask = () => {
-    // temp.push({id:2,title:title,description:description})
-    // Implement a function to add the new task to the local database or storage.
-    tasks = temp.concat({id:2,title:title,description:description})
-    // Ensure you update the tasks state in TodoListScreen.
+  
+    const newTask = {id:length+1, title, description };
+    
+    addTask(newTask);
+
     navigation.navigate('TodoList');
   };
 
@@ -19,12 +23,12 @@ const AddTaskScreen = ({ navigation}) => {
       <TextInput
         placeholder="Task Title"
         value={title}
-        onChangeText={setTitle}
+        onChangeText={(e)=>setTitle(e)}
       />
       <TextInput
         placeholder="Task Description"
         value={description}
-        onChangeText={setDescription}
+        onChangeText={(e)=>setDescription(e)}
       />
       <Button title="Add Task" onPress={handleAddTask} />
     </View>
